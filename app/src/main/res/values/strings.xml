@@ -26,4 +26,7 @@
     <string name="delete">Удалить</string>
     <string name="cancel">Выход</string>
     <string name="deleteNote">Удалить заметку?</string>
+    <string name="hello_my">Hello</string>
+    <string name="enter_text_ed">Enter text</string>
+    <string name="saves">Save</string>
 </resources>
