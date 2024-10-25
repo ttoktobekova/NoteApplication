@@ -1,19 +1,25 @@
 package com.example.noteapp.ui.fragment.note
 
+import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.noteapp.App.App
 import com.example.noteapp.R
+import com.example.noteapp.data.models.NoteModel
 import com.example.noteapp.databinding.FragmentNoteBinding
-import com.example.noteapp.ui.utils.PreferenceHelper
+import com.example.noteapp.ui.adapters.NoteAdapter
+import com.example.noteapp.ui.interFace.OnClickItem
 
 
-class NoteFragment : Fragment() {
-private var _binding :FragmentNoteBinding? = null
+class NoteFragment : Fragment(), OnClickItem {
+    private var _binding: FragmentNoteBinding? = null
     private val binding get() = _binding!!
-    val sharedPreferences = PreferenceHelper()
+    private val noteAdapter = NoteAdapter(this, this)
 
 
     override fun onCreateView(
@@ -27,19 +33,47 @@ private var _binding :FragmentNoteBinding? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
+        initialize()
+        getData()
     }
 
-    private fun setupListeners()  = with(binding){
-        sharedPreferences.unit(requireContext())
-        btnSave.setOnClickListener{
-            val et = etText.text.toString().trim()
-          //мы снизу дали значение
-            sharedPreferences.text = et
-            tvSave.text = et
+    private fun setupListeners() {
+        binding.btnAddText.setOnClickListener {
+            findNavController().navigate(R.id.action_noteFragment_to_noteDetailFragment)
         }
-            //мы тут берём сохр значение
-        tvSave.text = sharedPreferences.text
     }
 
+    private fun initialize() {
+        binding.homeRv.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = noteAdapter
+        }
+    }
+
+    private fun getData() {
+        App.appDataBase?.noteDao()?.getAll()?.observe(viewLifecycleOwner) { listNote ->
+            noteAdapter.submitList(listNote)
+        }
+    }
+
+    override fun onLongClick(noteModel: NoteModel) {
+        val builder = AlertDialog.Builder(requireContext())
+        with(builder) {
+            setTitle(getString(R.string.deleteNote))
+            setPositiveButton(getString(R.string.delete)) { _, _ ->
+                App.appDataBase?.noteDao()?.deleteNote(noteModel)
+            }
+            setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                dialog.cancel()
+            }
+            show()
+        }
+        builder.create()
+    }
+
+    override fun onClick(noteModel: NoteModel) {
+        val action = NoteFragmentDirections.actionNoteFragmentToNoteDetailFragment(noteModel.id)
+        findNavController().navigate(action)
+    }
 
 }

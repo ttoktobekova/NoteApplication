@@ -1,7 +1,9 @@
 package com.example.noteapp.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.noteapp.R
@@ -21,7 +23,9 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         navController = navHostFragment.navController
         setContentView(binding.root)
+
         isView()
+        setupAppBarVisibility()
     }
 
     private fun isView() {
@@ -29,6 +33,22 @@ class MainActivity : AppCompatActivity() {
         pref.unit(this)
         if (!pref.isShow()) {
             navController.navigate(R.id.onBoardFragment)
+        }
+    }
+
+    private fun setupAppBarVisibility() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val layoutParams =
+                binding.fragmentContainer.layoutParams as ConstraintLayout.LayoutParams
+
+            if (destination.id == R.id.noteFragment) {
+                binding.appBar.visibility = View.VISIBLE
+                layoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.appbar_height)
+            } else {
+                binding.appBar.visibility = View.GONE
+                layoutParams.topMargin = 0
+            }
+            binding.fragmentContainer.layoutParams = layoutParams //
         }
     }
 
