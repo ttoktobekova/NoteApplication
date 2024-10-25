@@ -33,4 +33,5 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="web_cliet_id">192415594325-73j2vhhim3k25nq76mbhlmqmkv9uu1aj.apps.googleusercontent.com</string>
     <string name="notesss">Notes</string>
+    <string name="notif_channel_id">com.example.noteapp.ui.activity</string>
 </resources>
