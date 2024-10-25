@@ -23,6 +23,15 @@ class PreferenceHelper {
     fun onShowed() {
         sharedPreferences.edit().putBoolean(TEXT_BOOLEAN2, true).apply()
     }
+
+    fun isShowSingUp(): Boolean {
+        return sharedPreferences.getBoolean(SING_UP_KEY, false)
+    }
+
+    fun onShowSingUp() {
+        return sharedPreferences.edit().putBoolean(SING_UP_KEY, true).apply()
+    }
+
     fun saveSelectedColor(color: Int) {
         sharedPreferences.edit().putInt(SELECTED_COLOR_KEY, color).apply()
     }
@@ -30,10 +39,12 @@ class PreferenceHelper {
     fun getSelectedColor(): Int {
         return sharedPreferences.getInt(SELECTED_COLOR_KEY, R.color.btn_gray)
     }
+
     companion object {
-        const val TEXT_BOOLEAN2 = "booleanApplication22"
+        const val TEXT_BOOLEAN2 = "booleanApplication7"
         const val TEXT_KEY = "text"
         const val SHARED_KEY = "shared_key"
         const val SELECTED_COLOR_KEY = "selected_color"
+        const val SING_UP_KEY = "singUp7"
     }
 }

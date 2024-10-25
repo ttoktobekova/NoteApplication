@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "192415594325",
+    "project_id": "noteapp-af0f4",
+    "storage_bucket": "noteapp-af0f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192415594325:android:82a122ab95d331f555e1dc",
+        "android_client_info": {
+          "package_name": "com.example.noteapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdaZZ4XNZZ6geKT57dD3shwBmqJLSdmeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
