@@ -33,4 +33,9 @@
             android:name="noteID"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/singUpFragment"
+        android:name="com.example.noteapp.ui.fragment.signingUp.SingUpFragment"
+        android:label="fragment_signing_up"
+        tools:layout="@layout/fragment_signing_up" />
 </navigation>

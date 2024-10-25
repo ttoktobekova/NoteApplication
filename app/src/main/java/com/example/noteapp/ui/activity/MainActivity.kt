@@ -1,6 +1,7 @@
 package com.example.noteapp.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -31,10 +32,14 @@ class MainActivity : AppCompatActivity() {
     private fun isView() {
         pref = PreferenceHelper()
         pref.unit(this)
+
         if (!pref.isShow()) {
             navController.navigate(R.id.onBoardFragment)
+        } else if (!pref.isShowSingUp()) {
+            navController.navigate(R.id.singUpFragment)
         }
     }
+
 
     private fun setupAppBarVisibility() {
         navController.addOnDestinationChangedListener { _, destination, _ ->

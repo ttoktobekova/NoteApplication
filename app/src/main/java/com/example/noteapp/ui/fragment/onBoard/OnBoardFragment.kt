@@ -55,7 +55,7 @@ class OnBoardFragment : Fragment() {
                 binding.tvSkip.visibility = if (position < 2) View.VISIBLE else View.INVISIBLE
                 binding.btnStart.visibility = if (position < 2) View.INVISIBLE else View.VISIBLE
                 binding.btnStart.setOnClickListener {
-                    findNavController().navigate(R.id.noteFragment)
+                    findNavController().navigate(R.id.singUpFragment)
                 }
 
             }

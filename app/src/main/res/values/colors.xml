@@ -30,4 +30,6 @@
     <color name="btn_white">#EBE4C9</color>
     <color name="material_white">#DEC8C6</color>
     <color name="md_blue_200">#009688</color>
+    <color name="blue_google">#03A9F4</color>
+    <color name="img_sing">#252525</color>
 </resources>
