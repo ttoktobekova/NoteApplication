@@ -2,6 +2,7 @@ package com.example.noteapp.ui.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.noteapp.R
 
 class PreferenceHelper {
 
@@ -22,11 +23,17 @@ class PreferenceHelper {
     fun onShowed() {
         sharedPreferences.edit().putBoolean(TEXT_BOOLEAN2, true).apply()
     }
+    fun saveSelectedColor(color: Int) {
+        sharedPreferences.edit().putInt(SELECTED_COLOR_KEY, color).apply()
+    }
 
+    fun getSelectedColor(): Int {
+        return sharedPreferences.getInt(SELECTED_COLOR_KEY, R.color.btn_gray)
+    }
     companion object {
-        const val TEXT_BOOLEAN2 = "bool2"
+        const val TEXT_BOOLEAN2 = "booleanApplication22"
         const val TEXT_KEY = "text"
         const val SHARED_KEY = "shared_key"
-
+        const val SELECTED_COLOR_KEY = "selected_color"
     }
 }
