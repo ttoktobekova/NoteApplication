@@ -74,6 +74,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     //auth google
     implementation("com.google.android.gms:play-services-auth:21.2.0")
-
-
+     //circle
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }

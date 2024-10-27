@@ -9,6 +9,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.noteapp.R
 import com.example.noteapp.databinding.ActivityMainBinding
 import com.example.noteapp.ui.utils.PreferenceHelper
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -31,11 +33,19 @@ class MainActivity : AppCompatActivity() {
     private fun isView() {
         pref = PreferenceHelper()
         pref.unit(this)
+        val auth = Firebase.auth
+        val user = auth.currentUser
 
         if (!pref.isShow()) {
             navController.navigate(R.id.onBoardFragment)
         } else if (!pref.isShowSingUp()) {
             navController.navigate(R.id.singUpFragment)
+        } else if (user == null) {
+            navController.navigate(R.id.singUpFragment)
+        } else if (user != null) {
+            navController.navigate(R.id.noteFragment)
+        } else if (pref.isShow() && pref.isShowSingUp()) {
+            navController.navigate(R.id.noteFragment)
         }
     }
 
@@ -52,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 binding.appBar.visibility = View.GONE
                 layoutParams.topMargin = 0
             }
-            binding.fragmentContainer.layoutParams = layoutParams //
+            binding.fragmentContainer.layoutParams = layoutParams
         }
     }
 

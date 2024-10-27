@@ -28,6 +28,8 @@ class SingUpFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSingInClient: GoogleSignInClient
+    private val sharedPreferences = PreferenceHelper()
+
 
     //мы тут открываем акаунт и обработываем ошибку
     private val singInLauncher =
@@ -68,7 +70,6 @@ class SingUpFragment : Fragment() {
     }
 
     private fun onShow() {
-        val sharedPreferences = PreferenceHelper()
         sharedPreferences.unit(requireContext())
         sharedPreferences.onShowSingUp()
     }
@@ -94,8 +95,9 @@ class SingUpFragment : Fragment() {
     }
 
     private fun updateUi(user: FirebaseUser?) {
-        if (user != null) {
+        if (user != null ) {
             findNavController().navigate(R.id.noteFragment)
+            sharedPreferences.isShowSingUp()
         } else {
             Toast.makeText(requireContext(), "Аутентификация не удалось", Toast.LENGTH_SHORT).show()
         }
